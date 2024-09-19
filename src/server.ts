@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import usersRoutes from "./routes/users.routes"
+import { dbConnection } from "./database/connection";
 
 export class Server {
   private app: Application;
@@ -11,6 +12,9 @@ export class Server {
     this.app = express();
     this.port = process.env.PORT || "3000";
 
+
+    // DB Connection
+    dbConnection()
 
     //Metodos iniciales
     this.middlewares(); 
