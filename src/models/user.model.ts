@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const UserSchema: Schema = new Schema({
-  numeroDocumento: {
+  documentNumber: {
     type: String,
     unique: true,
     require: true,
