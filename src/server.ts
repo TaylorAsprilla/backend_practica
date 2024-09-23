@@ -1,12 +1,14 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import usersRoutes from "./routes/users.routes"
+import productsRoutes from "./routes/product.routes"
 import { dbConnection } from "./database/connection";
 
 export class Server {
   private app: Application;
   private port: string;
-  private api_paths = { home: "/api/v1/home", users: "/api/v1/users" };
+  private api_paths = { home: "/api/v1/home", users: "/api/v1/users", products: "/api/v1/products" };
+
 
   constructor() {
     this.app = express();
@@ -38,6 +40,7 @@ export class Server {
   //Rutas
   routes(): void{
     this.app.use(this.api_paths.users, usersRoutes)
+    this.app.use(this.api_paths.products, productsRoutes)
   }
 
   listen(): void {
