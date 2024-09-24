@@ -1,5 +1,3 @@
-import { resolve } from "path";
-
 const jwt = require("jsonwebtoken");
 
 export const generateJWT = (
@@ -13,7 +11,7 @@ export const generateJWT = (
       uid,
       login,
     };
-    jwt.sing(
+    jwt.sign(
       payload,
       jwtSecret,
       {

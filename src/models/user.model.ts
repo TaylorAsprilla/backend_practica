@@ -6,7 +6,7 @@ import { IStore } from "./store.model";
 export interface IUser extends Document{
   documentNumber:string;
   name:string;
-  email?:string;
+  email:string;
   dateBirth:Date;
   password?: string,
   store: PopulatedDoc<IStore & Document>[]
