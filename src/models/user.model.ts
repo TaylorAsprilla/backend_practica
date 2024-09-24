@@ -4,10 +4,11 @@ import { IStore } from "./store.model";
 
 
 export interface IUser extends Document{
-//   documentNumber:string;
+  documentNumber:string;
   name:string;
   email?:string;
-//   dateBirth:Date;
+  dateBirth:Date;
+  password?: string,
   store: PopulatedDoc<IStore & Document>[]
 }
 
@@ -26,6 +27,15 @@ const UserSchema: Schema = new Schema({
   },
   dateBirth: {
     type: Date,
+  },
+  password: {
+    type: String,
+    
+  },
+  role: {
+    type: String,
+    require: true,
+    default: "USER_ROLE",
   },
   createdAt: {
     type: Date,
