@@ -3,7 +3,7 @@ import { UserModel } from "../models/user.model";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const getAllUsers = await UserModel.find({});
+    const getAllUsers = await UserModel.find({}).populate('store');
 
     res.json({ ok: true, users: getAllUsers });
   } catch (error) {

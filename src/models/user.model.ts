@@ -1,4 +1,15 @@
-import mongoose, { Schema } from "mongoose";
+
+import { model, PopulatedDoc, Schema, Types } from "mongoose";
+import { IStore } from "./store.model";
+
+
+export interface IUser extends Document{
+//   documentNumber:string;
+  name:string;
+  email?:string;
+//   dateBirth:Date;
+  store: PopulatedDoc<IStore & Document>[]
+}
 
 const UserSchema: Schema = new Schema({
   documentNumber: {
@@ -20,7 +31,12 @@ const UserSchema: Schema = new Schema({
     type: Date,
     default: Date.now,
   },
+  store:[{
+    type: Types.ObjectId,
+    ref:'Store'
+  }]
+
 });
 
-export const UserModel = mongoose.model('User', UserSchema);
+export const UserModel = model<IUser>('User', UserSchema);
 

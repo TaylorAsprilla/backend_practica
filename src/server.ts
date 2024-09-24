@@ -1,28 +1,33 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import usersRoutes from "./routes/users.routes"
-import productsRoutes from "./routes/product.routes"
 import { dbConnection } from "./database/connection";
+
+import usersRoutes from "./routes/users.routes";
+import productsRoutes from "./routes/product.routes";
+import storeRoutes from "./routes/store.routes";
 
 export class Server {
   private app: Application;
   private port: string;
-  private api_paths = { home: "/api/v1/home", users: "/api/v1/users", products: "/api/v1/products" };
-
+  private api_paths = {
+    home: "/api/v1/home",
+    users: "/api/v1/users",
+    products: "/api/v1/products",
+    store: "/api/v1/store",
+  };
 
   constructor() {
     this.app = express();
     this.port = process.env.PORT || "3000";
 
-
     // DB Connection
-    dbConnection()
+    dbConnection();
 
     //Metodos iniciales
-    this.middlewares(); 
+    this.middlewares();
 
     // Definir Rutas
-    this.routes()
+    this.routes();
   }
 
   mi_primera_api() {
@@ -38,9 +43,10 @@ export class Server {
   }
 
   //Rutas
-  routes(): void{
-    this.app.use(this.api_paths.users, usersRoutes)
-    this.app.use(this.api_paths.products, productsRoutes)
+  routes(): void {
+    this.app.use(this.api_paths.users, usersRoutes);
+    this.app.use(this.api_paths.products, productsRoutes);
+    this.app.use(this.api_paths.store, storeRoutes);
   }
 
   listen(): void {
