@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 export const generateJWT = (
   uid: string,
-  login: string,
+  login?: string,
   expiresIn: string = process.env.EXPIRES_IN || "12h",
   jwtSecret = process.env.JWT_SECRET
 ) => {

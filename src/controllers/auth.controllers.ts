@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserModel } from "../models/user.model";
 import bcrypt from "bcrypt";
 import { generateJWT } from "../helpers/jwt";
+import { CustomRequest } from "../middlewares/validate-jwt";
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -32,6 +33,9 @@ export const login = async (req: Request, res: Response) => {
     // Generar Token
     const token = await generateJWT(userDB.id, userDB.email);
 
+
+
+
     res.json({
       ok: true,
       token,
@@ -45,4 +49,24 @@ export const login = async (req: Request, res: Response) => {
       msg: "Login Error",
     });
   }
+};
+
+export const renewToken = async (req: CustomRequest, res: Response) => {
+  const uid = req.uid;
+
+  if (typeof uid === "undefined") {
+    throw new Error("uid not provided");
+  }
+
+  const user = await UserModel.findById(uid);
+
+  
+
+  // generate Token
+  const token = await generateJWT(uid.toString());
+  res.json({
+    ok: true,
+    token,
+    user,
+  });
 };

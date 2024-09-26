@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { createUsers, getUserByDocumentoNumber, getUsers , getUserById, updateUserById, deleteUserById} from "../controllers/users.controller";
+import { validateJWT } from "../middlewares/validate-jwt";
 
 const router = Router();
 
-router.get("/", getUsers);
+router.get("/", validateJWT, getUsers);
 router.get('/document/:document', getUserByDocumentoNumber)
 router.get('/id/:id', getUserById)
 router.post("/", createUsers);

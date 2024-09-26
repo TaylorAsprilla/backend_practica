@@ -6,7 +6,11 @@ export interface CustomRequest extends Request {
   uid?: number;
 }
 
-export const validateJWT = (req: CustomRequest, res: Response, next: NextFunction) => {
+export const validateJWT = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.header("x-token");
 
   if (!token) {
@@ -18,7 +22,10 @@ export const validateJWT = (req: CustomRequest, res: Response, next: NextFunctio
 
   try {
     const { uid } = jwt.verify(token, process.env.JWT_SECRET);
+
     req.uid = uid;
+
+    next();
   } catch (error) {
     return res.status(401).json({
       ok: false,
