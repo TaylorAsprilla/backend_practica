@@ -6,6 +6,7 @@ import usersRoutes from "./routes/users.routes";
 import productsRoutes from "./routes/product.routes";
 import storeRoutes from "./routes/store.routes";
 import loginRoutes from "./routes/auth.routes";
+import customersRoutes from "./routes/customers.routes";
 
 export class Server {
   private app: Application;
@@ -15,7 +16,8 @@ export class Server {
     users: "/api/v1/users",
     products: "/api/v1/products",
     store: "/api/v1/store",
-    login: "/api/v1/login"
+    login: "/api/v1/login",
+    customers: "/api/v1/customers"
   };
 
   constructor() {
@@ -50,6 +52,7 @@ export class Server {
     this.app.use(this.api_paths.products, productsRoutes);
     this.app.use(this.api_paths.store, storeRoutes);
     this.app.use(this.api_paths.login, loginRoutes);
+    this.app.use(this.api_paths.customers, customersRoutes); 
   }
 
   listen(): void {
