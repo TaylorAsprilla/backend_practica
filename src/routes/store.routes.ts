@@ -6,7 +6,7 @@ import { deleteProductById, updateProductById } from "../controllers/products.co
 const router = Router()
 
 
-router.get('/', validateJWT, getStores)
+router.get('/', getStores)
 router.get('/:id',getStoreById)
 router.post('/create',createStore)
 router.patch('/update/:id',updateProductById)
